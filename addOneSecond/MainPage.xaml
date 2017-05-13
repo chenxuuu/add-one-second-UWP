@@ -12,30 +12,112 @@
         <Storyboard x:Name="addedOneSecondStoryboard">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX">
                 <EasingDoubleKeyFrame Value="1" KeyTime="0:0:0" />
-                <EasingDoubleKeyFrame Value="5" KeyTime="0:0:0.5" EasingFunction="{StaticResource CubicEaseIn}" />
+                <EasingDoubleKeyFrame Value="5" KeyTime="0:0:0.2" EasingFunction="{StaticResource CubicEaseIn}" />
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY">
                 <EasingDoubleKeyFrame Value="1" KeyTime="0:0:0" />
-                <EasingDoubleKeyFrame Value="5" KeyTime="0:0:0.5" EasingFunction="{StaticResource CubicEaseIn}" />
+                <EasingDoubleKeyFrame Value="5" KeyTime="0:0:0.2" EasingFunction="{StaticResource CubicEaseIn}" />
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="addedOneSecondTextBlock" Storyboard.TargetProperty="Opacity">
                 <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0" />
-                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.5" />
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.2" />
             </DoubleAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="addedOneSecondTextBlock" Storyboard.TargetProperty="Visibility">
                 <DiscreteObjectKeyFrame Value="Visible" KeyTime="0:0:0" />
-                <DiscreteObjectKeyFrame Value="Collapsed" KeyTime="0:0:0.5" />
+                <DiscreteObjectKeyFrame Value="Collapsed" KeyTime="0:0:0.2" />
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
-    <SplitView Name="mainSplitView" DisplayMode="Overlay" >
+    <SplitView Name="mainSplitView" DisplayMode="Overlay" OpenPaneLength="300">
         <SplitView.Pane>
-            <Grid>
-                
-            </Grid>
+            <ScrollViewer Background="White">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Settings" HorizontalAlignment="Center" FontSize="22" Margin="5"/>
+                    <ToggleSwitch Name="isfullScreen" 
+                                  OffContent="Full screen is off" 
+                                  OnContent="Full screen is on" 
+                                  Margin="5"
+                                  Toggled="isfullScreen_Toggled"/>
+                    <ToggleSwitch Name="isAotuAddOneSecondOpen" 
+                                  OffContent="Auto +1s is disabled" 
+                                  OnContent="Auto +1s is enabled" 
+                                  Margin="5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="BackGround color:" FontSize="22" Margin="5"/>
+                        <Button Name="ApplyBackGroungColor" Content="Apply" Margin="5" Click="ApplyBackGroungColor_Click"/>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="R:" FontSize="20" Margin="5"/>
+                        <Slider Name="BackGroundColorRedSlider" 
+                                Grid.Column="1" 
+                                Maximum="255"
+                                Margin="2,0,20,0"/>
+                        <TextBlock Text="G:" FontSize="20" Margin="5" Grid.Row="1"/>
+                        <Slider Name="BackGroundColorGreenSlider" 
+                                Grid.Column="1" 
+                                Grid.Row="1" 
+                                Maximum="255"
+                                Margin="2,0,20,0"/>
+                        <TextBlock Text="B:" FontSize="20" Margin="5" Grid.Row="2"/>
+                        <Slider Name="BackGroundColorBlueSlider" 
+                                Grid.Column="1" 
+                                Grid.Row="2"
+                                Maximum="255"
+                                Margin="2,0,20,0"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Font color:" FontSize="22" Margin="5"/>
+                        <Button Name="ApplyFontColor" Content="Apply" Margin="5" Click="ApplyFontColor_Click"/>
+                    </StackPanel>                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="R:" FontSize="20" Margin="5"/>
+                        <Slider Name="FontColorRedSlider" 
+                                Grid.Column="1" 
+                                Maximum="255"
+                                Margin="2,0,20,0"/>
+                        <TextBlock Text="G:" FontSize="20" Margin="5" Grid.Row="1"/>
+                        <Slider Name="FontColorGreenSlider" 
+                                Grid.Column="1" 
+                                Grid.Row="1" 
+                                Maximum="255"
+                                Margin="2,0,20,0"/>
+                        <TextBlock Text="B:" FontSize="20" Margin="5" Grid.Row="2"/>
+                        <Slider Name="FontColorBlueSlider" 
+                                Grid.Column="1" 
+                                Grid.Row="2" 
+                                Maximum="255"
+                                Margin="2,0,20,0"/>
+                    </Grid>
+                    <TextBlock Text="About:" FontSize="22" Margin="5"/>
+                    <TextBlock Text="This application is to let everyone donate for the time donation project.You can help me to make this application have more functions." FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="Now this application can get the collected time from angry.im,and show it on screen." FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="Thanks for the apis from https://angry.im/." IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="this project on github:" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="https://github.com/chenxuuu/add-one-second-UWP" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+
+                </StackPanel>
+            </ScrollViewer>
         </SplitView.Pane>
         <SplitView.Content>
-            <Grid Name="mainGrid">
+            <Grid Name="mainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="*"/>
@@ -46,7 +128,8 @@
                        HorizontalAlignment="Center" 
                        Margin="3" 
                        FontFamily="Consolas" 
-                       FontWeight="Bold"/>
+                       FontWeight="Bold"
+                       />
                 </Viewbox>
                 <Viewbox Grid.Row="1">
                     <AppBarButton Name="secondGet" 
@@ -60,11 +143,11 @@
 
                 <Viewbox Grid.Row="0">
                     <TextBlock x:Name="addedOneSecondTextBlock" 
-                   Text="+1s"
-                   FontFamily="Impact"
-                   HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                   RenderTransformOrigin=".5,  1"
-                   Visibility="Collapsed">
+                               Text="+1s"
+                               FontFamily="Impact"
+                               HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                               RenderTransformOrigin=".5,  1"
+                               Visibility="Collapsed">
                         <TextBlock.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform x:Name="RotateTransform" />
@@ -78,7 +161,7 @@
                       IsCompact="True" 
                       Height="50" 
                       Width="30" 
-                      HorizontalAlignment="Right" 
+                      HorizontalAlignment="left" 
                       VerticalAlignment="Bottom" 
                       Grid.Row="1"
                       Click="settings_Click"/>
