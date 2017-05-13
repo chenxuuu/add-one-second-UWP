@@ -6,13 +6,83 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
+    <Page.Resources>
+        <CubicEase EasingMode="EaseIn" x:Key="CubicEaseIn" />
+        <Storyboard x:Name="addedOneSecondStoryboard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX">
+                <EasingDoubleKeyFrame Value="1" KeyTime="0:0:0" />
+                <EasingDoubleKeyFrame Value="5" KeyTime="0:0:0.5" EasingFunction="{StaticResource CubicEaseIn}" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY">
+                <EasingDoubleKeyFrame Value="1" KeyTime="0:0:0" />
+                <EasingDoubleKeyFrame Value="5" KeyTime="0:0:0.5" EasingFunction="{StaticResource CubicEaseIn}" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="addedOneSecondTextBlock" Storyboard.TargetProperty="Opacity">
+                <LinearDoubleKeyFrame Value="1" KeyTime="0:0:0" />
+                <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.5" />
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="addedOneSecondTextBlock" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame Value="Visible" KeyTime="0:0:0" />
+                <DiscreteObjectKeyFrame Value="Collapsed" KeyTime="0:0:0.5" />
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    <SplitView Name="mainSplitView" DisplayMode="Overlay" >
+        <SplitView.Pane>
+            <Grid>
+                
+            </Grid>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid Name="mainGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0">
+                    <TextBlock Name="secondsShow" 
+                       Text="Loading..." 
+                       HorizontalAlignment="Center" 
+                       Margin="3" 
+                       FontFamily="Consolas" 
+                       FontWeight="Bold"/>
+                </Viewbox>
+                <Viewbox Grid.Row="1">
+                    <AppBarButton Name="secondGet" 
+                          Icon="Clock" 
+                          Label="+1s" 
+                          FontFamily="Impact"
+                          IsCompact="False" 
+                          Click="secondGet_Click" 
+                          HorizontalAlignment="Center" />
+                </Viewbox>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Name="secondsShow" Text="Loading..." FontSize="100" HorizontalAlignment="Center" />
-        <Button Name="secondGet" Content="+1s" Click="secondGet_Click" FontSize="100" HorizontalAlignment="Center" Grid.Row="1"/>
-    </Grid>
+                <Viewbox Grid.Row="0">
+                    <TextBlock x:Name="addedOneSecondTextBlock" 
+                   Text="+1s"
+                   FontFamily="Impact"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                   RenderTransformOrigin=".5,  1"
+                   Visibility="Collapsed">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform x:Name="RotateTransform" />
+                                <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Viewbox>
+                <AppBarButton Name="settings" 
+                      Icon="Setting" 
+                      IsCompact="True" 
+                      Height="50" 
+                      Width="30" 
+                      HorizontalAlignment="Right" 
+                      VerticalAlignment="Bottom" 
+                      Grid.Row="1"
+                      Click="settings_Click"/>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
 </Page>
