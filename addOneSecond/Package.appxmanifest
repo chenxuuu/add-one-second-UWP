@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="3698e612-cd3a-466c-afae-c1a22fed502b" Publisher="CN=chenxuuu" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="3698e612-cd3a-466c-afae-c1a22fed502b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="800948F61A16.1s" Publisher="CN=33E7C5B3-A6A5-4489-B89F-4038AA5CC34B" Version="1.1.1.0" />
+  <mp:PhoneIdentity PhoneProductId="c01ed048-669c-499f-a1e0-b0ea33ef8d55" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>addOneSecond</DisplayName>
-    <PublisherDisplayName>chenxuuu</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <DisplayName>+1s</DisplayName>
+    <PublisherDisplayName>晨旭</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.scale.png</Logo>
   </Properties>
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
@@ -16,7 +16,13 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="addOneSecond.App">
       <uap:VisualElements DisplayName="+1s" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="This is a cilent for time donation project." BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+        <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\BadgeLogo.png" />
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
         <uap:InitialRotationPreference>
