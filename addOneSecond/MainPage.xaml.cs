@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI;
+using Windows.Storage;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -29,6 +30,11 @@ namespace addOneSecond
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)  //页面加载完毕
+        {
+            GetSettings();
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += Timer_Tick;//每秒触发这个事件，以刷新时间
@@ -37,7 +43,7 @@ namespace addOneSecond
 
         private async void Timer_Tick(object sender, object e)
         {
-            if (isAotuAddOneSecondOpen.IsOn)
+            if (isAutoAddOneSecondOpen.IsOn)
             {
                 this.addedOneSecondStoryboard.Begin();  //+1s动画
                 try
@@ -88,12 +94,15 @@ namespace addOneSecond
             {
                 Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().ExitFullScreenMode();
             }
+            if (secondsShow.Text != "Loading...")
+                SaveSettings();
         }
 
         private void ApplyBackGroungColor_Click(object sender, RoutedEventArgs e)
         {
             SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
             mainGrid.Background = color;    //应用背景颜色
+            SaveSettings();
         }
 
         private void ApplyFontColor_Click(object sender, RoutedEventArgs e)
@@ -103,6 +112,134 @@ namespace addOneSecond
             secondGet.Foreground = color;
             addedOneSecondTextBlock.Foreground = color;
             settings.Foreground = color;
+            SaveSettings();
+        }
+
+        private async void SaveSettings()    //保存设置
+        {
+            StorageFolder folder;
+            folder = ApplicationData.Current.RoamingFolder; //获取应用目录的文件夹
+
+            var file_demonstration = await folder.CreateFileAsync("settings", CreationCollisionOption.ReplaceExisting);
+            //创建文件
+
+            using (Stream file = await file_demonstration.OpenStreamForWriteAsync())
+            {
+                using (StreamWriter write = new StreamWriter(file))
+                {
+                    write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
+                                                isfullScreen.IsOn,
+                                                isAutoAddOneSecondOpen.IsOn,
+                                                BackGroundColorRedSlider.Value,
+                                                BackGroundColorGreenSlider.Value,
+                                                BackGroundColorBlueSlider.Value,
+                                                FontColorRedSlider.Value,
+                                                FontColorGreenSlider.Value,
+                                                FontColorBlueSlider.Value
+                                               ));
+                }
+            }
+        }
+
+
+        private async void GetSettings()
+        {
+            BackGroundColorRedSlider.Value = 255;
+            BackGroundColorGreenSlider.Value = 255;
+            BackGroundColorBlueSlider.Value = 255;
+
+
+            StorageFolder folder;
+            folder = ApplicationData.Current.RoamingFolder; //获取应用目录的文件夹
+
+            var file_demonstration = await folder.CreateFileAsync("settings", CreationCollisionOption.OpenIfExists);
+            //创建文件
+
+            string s;
+            using (Stream file = await file_demonstration.OpenStreamForReadAsync())
+            {
+                using (StreamReader read = new StreamReader(file))
+                {
+                    s = read.ReadToEnd();
+                }
+            }
+            
+            if (s.IndexOf(";") >= 1 && s.IndexOf(";") != s.Length - 1)
+            {
+                string[] str2;
+                int count_temp = 0;
+                str2 = s.Split(';');
+                foreach (string i in str2)
+                {
+                    if (count_temp == 0)
+                    {
+                        if (i.ToString() == "True")
+                        {
+                            isfullScreen.IsOn = true;
+                        }
+                        else
+                        {
+                            isfullScreen.IsOn = false;
+                        }
+                        count_temp++;
+                    }
+                    else if (count_temp == 1)
+                    {
+                        if (i.ToString() == "True")
+                        {
+                            isAutoAddOneSecondOpen.IsOn = true;
+                        }
+                        else
+                        {
+                            isAutoAddOneSecondOpen.IsOn = false;
+                        }
+                        count_temp++;
+                    }
+                    else if (count_temp == 2)
+                    {
+                        BackGroundColorRedSlider.Value = double.Parse(i.ToString());
+                        count_temp++;
+                    }
+                    else if (count_temp == 3)
+                    {
+                        BackGroundColorGreenSlider.Value = double.Parse(i.ToString());
+                        count_temp++;
+                    }
+                    else if (count_temp == 4)
+                    {
+                        BackGroundColorBlueSlider.Value = double.Parse(i.ToString());
+                        count_temp++;
+                    }
+                    else if (count_temp == 5)
+                    {
+                        FontColorRedSlider.Value = double.Parse(i.ToString());
+                        count_temp++;
+                    }
+                    else if (count_temp == 6)
+                    {
+                        FontColorGreenSlider.Value = double.Parse(i.ToString());
+                        count_temp++;
+                    }
+                    else if (count_temp == 7)
+                    {
+                        FontColorBlueSlider.Value = double.Parse(i.ToString());
+                        count_temp++;
+                    }
+                }
+            }
+            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
+            secondsShow.Foreground = color;
+            secondGet.Foreground = color;
+            addedOneSecondTextBlock.Foreground = color;
+            settings.Foreground = color;
+            SolidColorBrush color2 = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
+            mainGrid.Background = color2;    //应用背景颜色
+        }
+
+        private void isAutoAddOneSecondOpen_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (secondsShow.Text != "Loading...")
+                SaveSettings();
         }
     }
 }

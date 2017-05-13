@@ -5,7 +5,8 @@
     xmlns:local="using:addOneSecond"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
     
     <Page.Resources>
         <CubicEase EasingMode="EaseIn" x:Key="CubicEaseIn" />
@@ -38,10 +39,11 @@
                                   OnContent="Full screen is on" 
                                   Margin="5"
                                   Toggled="isfullScreen_Toggled"/>
-                    <ToggleSwitch Name="isAotuAddOneSecondOpen" 
+                    <ToggleSwitch Name="isAutoAddOneSecondOpen" 
                                   OffContent="Auto +1s is disabled" 
                                   OnContent="Auto +1s is enabled" 
-                                  Margin="5"/>
+                                  Margin="5"
+                                  Toggled="isAutoAddOneSecondOpen_Toggled"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="BackGround color:" FontSize="22" Margin="5"/>
                         <Button Name="ApplyBackGroungColor" Content="Apply" Margin="5" Click="ApplyBackGroungColor_Click"/>
