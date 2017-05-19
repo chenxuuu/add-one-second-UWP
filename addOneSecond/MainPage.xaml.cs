@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI;
 using Windows.Storage;
+using Windows.UI.ViewManagement;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -100,18 +101,13 @@ namespace addOneSecond
 
         private void ApplyBackGroungColor_Click(object sender, RoutedEventArgs e)
         {
-            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
-            mainGrid.Background = color;    //应用背景颜色
+            //应用背景颜色
             SaveSettings();
         }
 
         private void ApplyFontColor_Click(object sender, RoutedEventArgs e)
         {
-            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
-            secondsShow.Foreground = color;
-            secondGet.Foreground = color;
-            addedOneSecondTextBlock.Foreground = color;
-            settings.Foreground = color;
+            //应用字体颜色
             SaveSettings();
         }
 
@@ -119,26 +115,31 @@ namespace addOneSecond
         {
             StorageFolder folder;
             folder = ApplicationData.Current.RoamingFolder; //获取应用目录的文件夹
-
-            var file_demonstration = await folder.CreateFileAsync("settings", CreationCollisionOption.ReplaceExisting);
-            //创建文件
-
-            using (Stream file = await file_demonstration.OpenStreamForWriteAsync())
+            try
             {
-                using (StreamWriter write = new StreamWriter(file))
+                var file_demonstration = await folder.CreateFileAsync("settings", CreationCollisionOption.ReplaceExisting);
+                //创建文件
+
+
+                using (Stream file = await file_demonstration.OpenStreamForWriteAsync())
                 {
-                    write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
-                                                isfullScreen.IsOn,
-                                                isAutoAddOneSecondOpen.IsOn,
-                                                BackGroundColorRedSlider.Value,
-                                                BackGroundColorGreenSlider.Value,
-                                                BackGroundColorBlueSlider.Value,
-                                                FontColorRedSlider.Value,
-                                                FontColorGreenSlider.Value,
-                                                FontColorBlueSlider.Value
-                                               ));
+                    using (StreamWriter write = new StreamWriter(file))
+                    {
+                        write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
+                                                    isfullScreen.IsOn,
+                                                    isAutoAddOneSecondOpen.IsOn,
+                                                    BackGroundColorRedSlider.Value,
+                                                    BackGroundColorGreenSlider.Value,
+                                                    BackGroundColorBlueSlider.Value,
+                                                    FontColorRedSlider.Value,
+                                                    FontColorGreenSlider.Value,
+                                                    FontColorBlueSlider.Value
+                                                   ));
+                    }
                 }
             }
+            catch { }
+
         }
 
 
@@ -156,6 +157,7 @@ namespace addOneSecond
             //创建文件
 
             string s;
+
             using (Stream file = await file_demonstration.OpenStreamForReadAsync())
             {
                 using (StreamReader read = new StreamReader(file))
@@ -163,6 +165,7 @@ namespace addOneSecond
                     s = read.ReadToEnd();
                 }
             }
+            
             
             if (s.IndexOf(";") >= 1 && s.IndexOf(";") != s.Length - 1)
             {
@@ -238,8 +241,52 @@ namespace addOneSecond
 
         private void isAutoAddOneSecondOpen_Toggled(object sender, RoutedEventArgs e)
         {
-            if (secondsShow.Text != "Loading...")
-                SaveSettings();
+            SaveSettings();
+        }
+
+        private void BackGroundColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
+            mainGrid.Background = color;    //应用背景颜色
+        }
+
+        private void BackGroundColorGreenSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
+            mainGrid.Background = color;    //应用背景颜色
+        }
+
+        private void BackGroundColorBlueSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
+            mainGrid.Background = color;    //应用背景颜色
+        }
+
+        private void FontColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
+            secondsShow.Foreground = color;    //应用字体颜色
+            secondGet.Foreground = color;
+            addedOneSecondTextBlock.Foreground = color;
+            settings.Foreground = color;
+        }
+
+        private void FontColorGreenSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
+            secondsShow.Foreground = color;    //应用字体颜色
+            secondGet.Foreground = color;
+            addedOneSecondTextBlock.Foreground = color;
+            settings.Foreground = color;
+        }
+
+        private void FontColorBlueSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
+            secondsShow.Foreground = color;    //应用字体颜色
+            secondGet.Foreground = color;
+            addedOneSecondTextBlock.Foreground = color;
+            settings.Foreground = color;
         }
     }
 }

@@ -34,7 +34,7 @@
             <ScrollViewer Background="White">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Settings" HorizontalAlignment="Center" FontSize="22" Margin="5"/>
-                    <ToggleSwitch Name="isfullScreen" 
+                    <ToggleSwitch Name="isfullScreen"
                                   OffContent="Full screen is off" 
                                   OnContent="Full screen is on" 
                                   Margin="5"
@@ -46,7 +46,7 @@
                                   Toggled="isAutoAddOneSecondOpen_Toggled"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="BackGround color:" FontSize="22" Margin="5"/>
-                        <Button Name="ApplyBackGroungColor" Content="Apply" Margin="5" Click="ApplyBackGroungColor_Click"/>
+                        <Button Name="ApplyBackGroungColor" Content="Save" Margin="5" Click="ApplyBackGroungColor_Click"/>
                     </StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -62,23 +62,26 @@
                         <Slider Name="BackGroundColorRedSlider" 
                                 Grid.Column="1" 
                                 Maximum="255"
-                                Margin="2,0,20,0"/>
+                                Margin="2,0,20,0"
+                                ValueChanged="BackGroundColorRedSlider_ValueChanged"/>
                         <TextBlock Text="G:" FontSize="20" Margin="5" Grid.Row="1"/>
                         <Slider Name="BackGroundColorGreenSlider" 
                                 Grid.Column="1" 
                                 Grid.Row="1" 
                                 Maximum="255"
-                                Margin="2,0,20,0"/>
+                                Margin="2,0,20,0"
+                                ValueChanged="BackGroundColorGreenSlider_ValueChanged"/>
                         <TextBlock Text="B:" FontSize="20" Margin="5" Grid.Row="2"/>
                         <Slider Name="BackGroundColorBlueSlider" 
                                 Grid.Column="1" 
                                 Grid.Row="2"
                                 Maximum="255"
-                                Margin="2,0,20,0"/>
+                                Margin="2,0,20,0"
+                                ValueChanged="BackGroundColorBlueSlider_ValueChanged"/>
                     </Grid>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Font color:" FontSize="22" Margin="5"/>
-                        <Button Name="ApplyFontColor" Content="Apply" Margin="5" Click="ApplyFontColor_Click"/>
+                        <Button Name="ApplyFontColor" Content="Save" Margin="5" Click="ApplyFontColor_Click"/>
                     </StackPanel>                    
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -94,19 +97,22 @@
                         <Slider Name="FontColorRedSlider" 
                                 Grid.Column="1" 
                                 Maximum="255"
-                                Margin="2,0,20,0"/>
+                                Margin="2,0,20,0"
+                                ValueChanged="FontColorRedSlider_ValueChanged"/>
                         <TextBlock Text="G:" FontSize="20" Margin="5" Grid.Row="1"/>
                         <Slider Name="FontColorGreenSlider" 
                                 Grid.Column="1" 
                                 Grid.Row="1" 
                                 Maximum="255"
-                                Margin="2,0,20,0"/>
+                                Margin="2,0,20,0"
+                                ValueChanged="FontColorGreenSlider_ValueChanged"/>
                         <TextBlock Text="B:" FontSize="20" Margin="5" Grid.Row="2"/>
                         <Slider Name="FontColorBlueSlider" 
                                 Grid.Column="1" 
                                 Grid.Row="2" 
                                 Maximum="255"
-                                Margin="2,0,20,0"/>
+                                Margin="2,0,20,0"
+                                ValueChanged="FontColorBlueSlider_ValueChanged"/>
                     </Grid>
                     <TextBlock Text="About:" FontSize="22" Margin="5"/>
                     <TextBlock Text="This application is to let everyone donate for the time donation project.You can help me to make this application have more functions." FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>

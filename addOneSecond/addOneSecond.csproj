@@ -21,7 +21,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>47A82072228128528F0A29BFDCF2F17358EA04B9</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>8D053242341CD20BE579340A56BF0E8C3CC87778</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -109,15 +109,8 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="addOneSecond_StoreKey.pfx" />
-    <None Include="addOneSecond_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\badgelogo.scale-100.png" />
-    <Content Include="Assets\badgelogo.scale-125.png" />
-    <Content Include="Assets\badgelogo.scale-150.png" />
-    <Content Include="Assets\badgelogo.scale-200.png" />
-    <Content Include="Assets\badgelogo.scale-400.png" />
     <Content Include="Assets\splashscreen.scale-100.png" />
     <Content Include="Assets\splashscreen.scale-125.png" />
     <Content Include="Assets\splashscreen.scale-150.png" />
@@ -156,6 +149,8 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <None Include="addOneSecond_StoreKey.pfx" />
+    <None Include="addOneSecond_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
