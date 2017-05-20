@@ -44,6 +44,11 @@
                                   OnContent="Auto +1s is enabled" 
                                   Margin="5"
                                   Toggled="isAutoAddOneSecondOpen_Toggled"/>
+                    <ToggleSwitch Name="isTileFresh" 
+                                  OffContent="Live tile is disabled" 
+                                  OnContent="Live tile is enabled(Medium-sized)" 
+                                  Margin="5"
+                                  Toggled="isTileFresh_Toggled"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="BackGround color:" FontSize="22" Margin="5"/>
                         <Button Name="ApplyBackGroungColor" Content="Save" Margin="5" Click="ApplyBackGroungColor_Click"/>

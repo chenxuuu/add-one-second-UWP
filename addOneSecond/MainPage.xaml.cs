@@ -97,8 +97,7 @@ namespace addOneSecond
             {
                 Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().ExitFullScreenMode();
             }
-            if (secondsShow.Text != "Loading...")
-                SaveSettings();
+            SaveSettings();
         }
 
         private void ApplyBackGroungColor_Click(object sender, RoutedEventArgs e)
@@ -135,7 +134,8 @@ namespace addOneSecond
                                                     BackGroundColorBlueSlider.Value,
                                                     FontColorRedSlider.Value,
                                                     FontColorGreenSlider.Value,
-                                                    FontColorBlueSlider.Value
+                                                    FontColorBlueSlider.Value,
+                                                    isTileFresh.IsOn
                                                    ));
                     }
                 }
@@ -230,6 +230,18 @@ namespace addOneSecond
                         FontColorBlueSlider.Value = double.Parse(i.ToString());
                         count_temp++;
                     }
+                    else if (count_temp == 8)
+                    {
+                        if (i.ToString() == "True")
+                        {
+                            isTileFresh.IsOn = true;
+                        }
+                        else
+                        {
+                            isTileFresh.IsOn = false;
+                        }
+                        count_temp++;
+                    }
                 }
             }
             SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
@@ -290,6 +302,59 @@ namespace addOneSecond
             secondGet.Foreground = color;
             addedOneSecondTextBlock.Foreground = color;
             settings.Foreground = color;
+        }
+
+
+        private async void isTileFresh_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (isTileFresh.IsOn)
+            {
+                await setLiveTile();
+            }
+            else
+            {
+                setLiveTileStop();
+            }
+            SaveSettings();
+        }
+
+        private void setLiveTileStop()
+        {
+            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+            updater.StopPeriodicUpdate();
+        }
+
+
+        private async Task setLiveTile()
+        {
+            try
+            {
+                string allSecondsString = await webLib.HttpGet("https://angry.im/l/life");  //获取秒数
+                long allSeconds = long.Parse(allSecondsString);   //转换成long
+                long dd, mm, hh, ss;     //用于存储最终数值
+                dd = allSeconds / 60 / 60 / 24;
+                hh = allSeconds / 60 / 60 % 24;
+                mm = allSeconds / 60 % 60;
+                ss = allSeconds % 60;
+
+                var tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150Text01);
+
+                var tileAttributes = tileXml.GetElementsByTagName("text");
+                tileAttributes[0].AppendChild(tileXml.CreateTextNode("Total time"));
+                tileAttributes[1].AppendChild(tileXml.CreateTextNode(dd + "d"));
+                tileAttributes[2].AppendChild(tileXml.CreateTextNode(hh + "h"));
+                tileAttributes[3].AppendChild(tileXml.CreateTextNode(mm + "m"));
+                var tileNotification = new TileNotification(tileXml);
+                TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotification);
+            }
+            catch { }
+
+            var tileContent = new Uri("https://www.chenxublog.com/getsecond.php");  //自建网站
+            var requestedInterval = PeriodicUpdateRecurrence.HalfHour;   //半小时一次
+
+            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+            updater.StartPeriodicUpdate(tileContent, requestedInterval);
+            updater.StopPeriodicUpdate();
         }
     }
 }
