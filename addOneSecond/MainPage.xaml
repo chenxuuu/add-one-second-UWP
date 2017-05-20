@@ -33,25 +33,25 @@
         <SplitView.Pane>
             <ScrollViewer Background="White">
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Settings" HorizontalAlignment="Center" FontSize="22" Margin="5"/>
+                    <TextBlock Text="设置" HorizontalAlignment="Center" FontSize="22" Margin="5"/>
                     <ToggleSwitch Name="isfullScreen"
-                                  OffContent="Full screen is off" 
-                                  OnContent="Full screen is on" 
+                                  OffContent="全屏已关闭" 
+                                  OnContent="全屏已开启" 
                                   Margin="5"
                                   Toggled="isfullScreen_Toggled"/>
                     <ToggleSwitch Name="isAutoAddOneSecondOpen" 
-                                  OffContent="Auto +1s is disabled" 
-                                  OnContent="Auto +1s is enabled" 
+                                  OffContent="自动+1s已关闭" 
+                                  OnContent="自动+1s已开启" 
                                   Margin="5"
                                   Toggled="isAutoAddOneSecondOpen_Toggled"/>
                     <ToggleSwitch Name="isTileFresh" 
-                                  OffContent="Live tile is disabled" 
-                                  OnContent="Live tile is enabled(Medium-sized)" 
+                                  OffContent="动态磁贴已关闭" 
+                                  OnContent="动态磁贴已开启（仅限中等大小）" 
                                   Margin="5"
                                   Toggled="isTileFresh_Toggled"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="BackGround color:" FontSize="22" Margin="5"/>
-                        <Button Name="ApplyBackGroungColor" Content="Save" Margin="5" Click="ApplyBackGroungColor_Click"/>
+                        <TextBlock Text="背景颜色：" FontSize="22" Margin="5"/>
+                        <Button Name="ApplyBackGroungColor" Content="保存设置" Margin="5" Click="ApplyBackGroungColor_Click"/>
                     </StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -63,14 +63,14 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="R:" FontSize="20" Margin="5"/>
+                        <TextBlock Text="红：" FontSize="20" Margin="5"/>
                         <Slider Name="BackGroundColorRedSlider" 
                                 Grid.Column="1"
                                 Maximum="255"
                                 Width="220"
                                 Margin="2,0,20,0"
                                 ValueChanged="BackGroundColorRedSlider_ValueChanged"/>
-                        <TextBlock Text="G:" FontSize="20" Margin="5" Grid.Row="1"/>
+                        <TextBlock Text="绿：" FontSize="20" Margin="5" Grid.Row="1"/>
                         <Slider Name="BackGroundColorGreenSlider" 
                                 Grid.Column="1" 
                                 Grid.Row="1" 
@@ -78,7 +78,7 @@
                                 Width="220"
                                 Margin="2,0,20,0"
                                 ValueChanged="BackGroundColorGreenSlider_ValueChanged"/>
-                        <TextBlock Text="B:" FontSize="20" Margin="5" Grid.Row="2"/>
+                        <TextBlock Text="蓝：" FontSize="20" Margin="5" Grid.Row="2"/>
                         <Slider Name="BackGroundColorBlueSlider" 
                                 Grid.Column="1" 
                                 Grid.Row="2"
@@ -88,8 +88,8 @@
                                 ValueChanged="BackGroundColorBlueSlider_ValueChanged"/>
                     </Grid>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Font color:" FontSize="22" Margin="5"/>
-                        <Button Name="ApplyFontColor" Content="Save" Margin="5" Click="ApplyFontColor_Click"/>
+                        <TextBlock Text="字体颜色：" FontSize="22" Margin="5"/>
+                        <Button Name="ApplyFontColor" Content="保存设置" Margin="5" Click="ApplyFontColor_Click"/>
                     </StackPanel>                    
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -101,14 +101,14 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="R:" FontSize="20" Margin="5"/>
+                        <TextBlock Text="红：" FontSize="20" Margin="5"/>
                         <Slider Name="FontColorRedSlider" 
                                 Grid.Column="1" 
                                 Maximum="255"
                                 Width="220"
                                 Margin="2,0,20,0"
                                 ValueChanged="FontColorRedSlider_ValueChanged"/>
-                        <TextBlock Text="G:" FontSize="20" Margin="5" Grid.Row="1"/>
+                        <TextBlock Text="绿：" FontSize="20" Margin="5" Grid.Row="1"/>
                         <Slider Name="FontColorGreenSlider" 
                                 Grid.Column="1" 
                                 Grid.Row="1" 
@@ -116,7 +116,7 @@
                                 Width="220"
                                 Margin="2,0,20,0"
                                 ValueChanged="FontColorGreenSlider_ValueChanged"/>
-                        <TextBlock Text="B:" FontSize="20" Margin="5" Grid.Row="2"/>
+                        <TextBlock Text="蓝：" FontSize="20" Margin="5" Grid.Row="2"/>
                         <Slider Name="FontColorBlueSlider" 
                                 Grid.Column="1" 
                                 Grid.Row="2" 
@@ -125,11 +125,11 @@
                                 Margin="2,0,20,0"
                                 ValueChanged="FontColorBlueSlider_ValueChanged"/>
                     </Grid>
-                    <TextBlock Text="About:" FontSize="22" Margin="5"/>
-                    <TextBlock Text="This application is to let everyone donate for the time donation project.You can help me to make this application have more functions." FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
-                    <TextBlock Text="Now this application can get the collected time from angry.im,and show it on screen." FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
-                    <TextBlock Text="Thanks for the apis from https://angry.im/." IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
-                    <TextBlock Text="this project on github:" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="关于" FontSize="22" Margin="5"/>
+                    <TextBlock Text="本软件用于时间众筹项目，欢迎大家帮助本软件实现更多功能。" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="本软件利用了angry.im提供的api进行处理，并将结果显示在软件中。" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="感谢https://angry.im/提供的api。" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="你也可以在github上参与本软件的编写与优化：" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
                     <TextBlock Text="https://github.com/chenxuuu/add-one-second-UWP" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
 
                 </StackPanel>

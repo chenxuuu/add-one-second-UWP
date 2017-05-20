@@ -258,11 +258,10 @@ namespace addOneSecond
             SaveSettings();
         }
 
-        private async void BackGroundColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void BackGroundColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
             mainGrid.Background = color;    //应用背景颜色
-            await Task.Delay(1);
         }
 
         private void BackGroundColorGreenSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
