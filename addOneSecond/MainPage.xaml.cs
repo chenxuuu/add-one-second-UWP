@@ -65,7 +65,7 @@ namespace addOneSecond
                 hh = allSeconds / 60 / 60 % 24;
                 mm = allSeconds / 60 % 60;
                 ss = allSeconds % 60;
-                result = $"{dd}d{hh.ToString().PadLeft(2)}h{mm.ToString().PadLeft(2)}m{ss.ToString().PadLeft(2)}s";
+                result = $"{dd}:{hh.ToString().PadLeft(2,'0')}:{mm.ToString().PadLeft(2, '0')}:{ss.ToString().PadLeft(2, '0')}";
                 secondsShow.Text = result;  //显示结果
             }
             catch { }
@@ -126,7 +126,7 @@ namespace addOneSecond
                 {
                     using (StreamWriter write = new StreamWriter(file))
                     {
-                        write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7}",
+                        write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8}",
                                                     isfullScreen.IsOn,
                                                     isAutoAddOneSecondOpen.IsOn,
                                                     BackGroundColorRedSlider.Value,
@@ -340,10 +340,10 @@ namespace addOneSecond
                 var tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150Text01);
 
                 var tileAttributes = tileXml.GetElementsByTagName("text");
-                tileAttributes[0].AppendChild(tileXml.CreateTextNode("Total time"));
-                tileAttributes[1].AppendChild(tileXml.CreateTextNode(dd + "d"));
-                tileAttributes[2].AppendChild(tileXml.CreateTextNode(hh + "h"));
-                tileAttributes[3].AppendChild(tileXml.CreateTextNode(mm + "m"));
+                tileAttributes[0].AppendChild(tileXml.CreateTextNode("时间众筹总计"));
+                tileAttributes[1].AppendChild(tileXml.CreateTextNode(dd + "天"));
+                tileAttributes[2].AppendChild(tileXml.CreateTextNode(hh + "小时"));
+                tileAttributes[3].AppendChild(tileXml.CreateTextNode(mm + "分钟"));
                 var tileNotification = new TileNotification(tileXml);
                 TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotification);
             }
