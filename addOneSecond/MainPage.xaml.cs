@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI;
 using Windows.Storage;
 using Windows.UI.ViewManagement;
+using Windows.UI.Notifications;
+using System.Threading.Tasks;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -244,10 +246,11 @@ namespace addOneSecond
             SaveSettings();
         }
 
-        private void BackGroundColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private async void BackGroundColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
             mainGrid.Background = color;    //应用背景颜色
+            await Task.Delay(1);
         }
 
         private void BackGroundColorGreenSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
