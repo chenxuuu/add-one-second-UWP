@@ -96,7 +96,7 @@ namespace addOneSecond
             //TODO: 保存应用程序状态并停止任何后台活动
             deferral.Complete();
         }
-        /*
+        
         protected override void OnActivated(IActivatedEventArgs e)
         {
             // Was the app activated by a voice command?
@@ -118,6 +118,6 @@ namespace addOneSecond
             {
                 page.openAuto();
             }
-        }*/
+        }
     }
 }
