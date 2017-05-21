@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="zh-cn" Name="AdventureWorksCommandSet_zh-cn">
+    <AppName> 续 </AppName>
+    <Example> 一秒 </Example>
+
+    <Command Name="addOneSecond">
+      <Example> 一秒 </Example>
+      <ListenFor> 一秒 </ListenFor>
+      <Feedback> excited！这是坠吼的！ </Feedback>
+      <Navigate/>
+    </Command>
+    
+  </CommandSet>
+</VoiceCommands>

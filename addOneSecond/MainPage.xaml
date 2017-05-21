@@ -45,10 +45,11 @@
                                   Margin="5"
                                   Toggled="isAutoAddOneSecondOpen_Toggled"/>
                     <ToggleSwitch Name="isTileFresh" 
-                                  OffContent="动态磁贴已关闭" 
+                                  OffContent="动态磁贴已关闭（开了就无法关闭）" 
                                   OnContent="动态磁贴已开启（仅限中等大小）" 
                                   Margin="5"
                                   Toggled="isTileFresh_Toggled"/>
+                    <TextBlock Text="关闭本软件后，对小娜说“续一秒”即可死机续命（我也不知道为什么会死机啊，明明设置的是打开这个软件）" Margin="5" TextWrapping="Wrap"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="背景颜色：" FontSize="22" Margin="5"/>
                         <Button Name="ApplyBackGroungColor" Content="保存设置" Margin="5" Click="ApplyBackGroungColor_Click"/>
@@ -131,7 +132,9 @@
                     <TextBlock Text="感谢https://angry.im/提供的api。" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
                     <TextBlock Text="你也可以在github上参与本软件的编写与优化：" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
                     <TextBlock Text="https://github.com/chenxuuu/add-one-second-UWP" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
-
+                    <TextBlock Text="如果你喜欢这个软件的话，可以让作者吃顿好的（哪里不对）：" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="支付宝：liucx1@foxmail.com" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
+                    <TextBlock Text="paypal：https://www.paypal.me/chenxuuu" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
                 </StackPanel>
             </ScrollViewer>
         </SplitView.Pane>

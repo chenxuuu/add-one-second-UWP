@@ -35,13 +35,19 @@ namespace addOneSecond
             this.InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)  //页面加载完毕
+        private async void Page_Loaded(object sender, RoutedEventArgs e)  //页面加载完毕
         {
             GetSettings();
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += Timer_Tick;//每秒触发这个事件，以刷新时间
             timer.Start();  //开始计时器
+
+            var storageFile =
+                        await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(
+                        new Uri("ms-appx:///VoiceCommandDictionary.xml"));
+            await Windows.ApplicationModel.VoiceCommands.VoiceCommandDefinitionManager
+                        .InstallCommandDefinitionsFromStorageFileAsync(storageFile);     //加载语音字典
         }
 
         private async void Timer_Tick(object sender, object e)
@@ -354,6 +360,11 @@ namespace addOneSecond
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.StartPeriodicUpdate(tileContent, requestedInterval);
             updater.StopPeriodicUpdate();
+        }
+
+        public void openAuto()
+        {
+            isAutoAddOneSecondOpen.IsOn = true;
         }
     }
 }
