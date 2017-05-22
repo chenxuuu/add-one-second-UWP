@@ -315,18 +315,9 @@ namespace addOneSecond
             if (isTileFresh.IsOn)
             {
                 await setLiveTile();
-            }
-            else
-            {
-                setLiveTileStop();
+                isTileFresh.IsEnabled = false;
             }
             SaveSettings();
-        }
-
-        private void setLiveTileStop()
-        {
-            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
-            updater.StopPeriodicUpdate();
         }
 
 
