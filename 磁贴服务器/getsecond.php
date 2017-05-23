@@ -99,9 +99,10 @@ I'm angry!我跟你讲啊，你们这样子啊，是不行的！
 $poems=explode("\n",$poems);
 return $poems[rand(0,count($poems)-1)];
 }
+$resultstr = random_str();
 ?>
 <tile>
-  <visual version="2" branding="logo" displayName="test">
+  <visual version="2" branding="logo" displayName="+1s">
     <binding template="TileSquare150x150PeekImageAndText01" fallback="TileSquarePeekImageAndText01">
       <image id="1" src="http://open.papapoi.com/excited/<?php echo $result;?>.png" alt="alt text"/>
       <text id="1">时间众筹总计</text>
@@ -111,12 +112,12 @@ return $poems[rand(0,count($poems)-1)];
     </binding>
     <binding template="TileWide310x150Text09" fallback="TileWideText09">
       <text id="1"><?php echo '时间众筹总计：'.$dd.'天'. $hh.'小时'.$mm.'分钟';?></text>
-      <text id="2">长者语录：<?php echo random_str();?></text>
+      <text id="2">长者语录：<?php echo $resultstr;?></text>
     </binding>
     <binding template="TileLarge">
       <text hint-style="title">时间众筹总计：</text>
       <text hint-style="base"><?php echo $dd.'天'. $hh.'小时'.$mm.'分钟';?></text>
-      <text hint-wrap="true" hint-style="baseSubtle">长者语录：<?php echo random_str();?></text>
+      <text hint-wrap="true" hint-style="baseSubtle">长者语录：<?php echo $resultstr;?></text>
     </binding>
   </visual>
 </tile>
