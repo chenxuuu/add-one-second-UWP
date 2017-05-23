@@ -18,6 +18,7 @@ using Windows.Storage;
 using Windows.UI.ViewManagement;
 using Windows.UI.Notifications;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -350,12 +351,12 @@ namespace addOneSecond
 
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.StartPeriodicUpdate(tileContent, requestedInterval);
-            updater.StopPeriodicUpdate();
         }
 
         public void openAuto()
         {
             isAutoAddOneSecondOpen.IsOn = true;
         }
+
     }
 }
