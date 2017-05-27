@@ -111,10 +111,12 @@ $resultstr = random_str();
       <text id="4"><?php echo $mm.'分钟';?></text>
     </binding>
     <binding template="TileWide310x150Text09" fallback="TileWideText09">
+      <?php if($result==75){echo '<image src="ms-appx:///Assets/pic/75.png" placement="background"/>';}?>
       <text id="1"><?php echo '时间众筹总计：'.$dd.'天'. $hh.'小时'.$mm.'分钟';?></text>
       <text id="2">长者语录：<?php echo $resultstr;?></text>
     </binding>
     <binding template="TileLarge">
+      <?php if($result==75){echo '<image src="ms-appx:///Assets/pic/75.png" placement="background"/>';}?>
       <text hint-style="title">时间众筹总计：</text>
       <text hint-style="base"><?php echo $dd.'天'. $hh.'小时'.$mm.'分钟';?></text>
       <text hint-wrap="true" hint-style="baseSubtle">长者语录：<?php echo $resultstr;?></text>
