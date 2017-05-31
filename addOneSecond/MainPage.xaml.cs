@@ -59,6 +59,7 @@ namespace addOneSecond
                 try
                 {
                     await webLib.HttpPost("https://angry.im/p/life", "+1s");  //post用来+1s
+                    SecondAdd();
                 }
                 catch { }
             }
@@ -84,6 +85,7 @@ namespace addOneSecond
             try
             {
                 await webLib.HttpPost("https://angry.im/p/life", "+1s");  //post用来+1s
+                SecondAdd();
             }
             catch { }
         }
@@ -117,6 +119,66 @@ namespace addOneSecond
         {
             //应用字体颜色
             SaveSettings();
+        }
+
+        private async void SecondAdd()
+        {
+            long total;
+            total = await GetTotalSecond();
+            total++;
+            SaveTotalSecond(total);
+            secondTotalShow.Text = $"你已经贡献了{total}秒";
+        }
+
+        private async void SaveTotalSecond(long seconds)
+        {
+            StorageFolder folder;
+            folder = ApplicationData.Current.RoamingFolder; //获取应用目录的文件夹
+            try
+            {
+                var file_demonstration = await folder.CreateFileAsync("seconds", CreationCollisionOption.ReplaceExisting);
+                //创建文件
+
+                using (Stream file = await file_demonstration.OpenStreamForWriteAsync())
+                {
+                    using (StreamWriter write = new StreamWriter(file))
+                    {
+                        write.Write(string.Format($"{seconds}"));
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private async Task<long> GetTotalSecond()
+        {
+            StorageFolder folder;
+            folder = ApplicationData.Current.RoamingFolder; //获取应用目录的文件夹
+
+            var file_demonstration = await folder.CreateFileAsync("seconds", CreationCollisionOption.OpenIfExists);
+            //创建文件
+
+            string s;
+
+            using (Stream file = await file_demonstration.OpenStreamForReadAsync())
+            {
+                using (StreamReader read = new StreamReader(file))
+                {
+                    s = read.ReadToEnd();
+                }
+            }
+
+            long seconds;
+            try
+            {
+                seconds = long.Parse(s);
+            }
+            catch
+            {
+                seconds = 0;
+            }
+
+            return seconds;
         }
 
         private async void SaveSettings()    //保存设置
@@ -256,6 +318,7 @@ namespace addOneSecond
             secondGet.Foreground = color;
             addedOneSecondTextBlock.Foreground = color;
             settings.Foreground = color;
+            secondTotalShow.Foreground = color;
             SolidColorBrush color2 = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
             mainGrid.Background = color2;    //应用背景颜色
         }
@@ -290,6 +353,7 @@ namespace addOneSecond
             secondGet.Foreground = color;
             addedOneSecondTextBlock.Foreground = color;
             settings.Foreground = color;
+            secondTotalShow.Foreground = color;
         }
 
         private void FontColorGreenSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -299,6 +363,7 @@ namespace addOneSecond
             secondGet.Foreground = color;
             addedOneSecondTextBlock.Foreground = color;
             settings.Foreground = color;
+            secondTotalShow.Foreground = color;
         }
 
         private void FontColorBlueSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -308,6 +373,7 @@ namespace addOneSecond
             secondGet.Foreground = color;
             addedOneSecondTextBlock.Foreground = color;
             settings.Foreground = color;
+            secondTotalShow.Foreground = color;
         }
 
 
