@@ -150,6 +150,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Name="secondTotalShow" Text="已贡献时间（加载中。。。）" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock Name="realTime" Text="你的实际时间（加载中。。。）" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
                 <Viewbox Grid.Row="0">
                     <TextBlock Name="secondsShow" 
                        Text="Loading..."

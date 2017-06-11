@@ -89,6 +89,7 @@ namespace addOneSecond
                 secondsShow.Text = result;  //显示结果
             }
             catch { }
+            await ShowRealTime();
         }
 
         private async void secondGet_Click(object sender, RoutedEventArgs e)  //+1s按键
@@ -227,7 +228,6 @@ namespace addOneSecond
             catch { }
 
         }
-
 
         private async void GetSettings()
         {
@@ -453,6 +453,7 @@ namespace addOneSecond
             addedOneSecondTextBlock.Foreground = color;
             settings.Foreground = color;
             secondTotalShow.Foreground = color;
+            realTime.Foreground = color;
 
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
@@ -475,6 +476,15 @@ namespace addOneSecond
                 //statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
                 statusBar.BackgroundOpacity = 1;
             }//手机状态栏颜色
+        }
+
+        private async Task ShowRealTime()  //显示被续过的时间
+        {
+            long total;
+            total = await GetTotalSecond();
+            DateTime now = DateTime.Now;
+            DateTime timeDeleted = now.AddSeconds(total);
+            realTime.Text = "你的实际时间：" + timeDeleted.ToString("yyyy年MM月dd日 HH:mm:ss");
         }
 
         public void openAuto()  //语音调用的东西
