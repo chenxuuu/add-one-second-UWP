@@ -144,7 +144,7 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Name="secondTotalShow" Text="已贡献时间（+1s后显示）" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                <TextBlock Name="secondTotalShow" Text="已贡献时间（+1s后显示）" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Viewbox Grid.Row="0">
                     <TextBlock Name="secondsShow" 
                        Text="Loading..."
