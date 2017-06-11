@@ -52,9 +52,18 @@ namespace addOneSecond
 
             Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
             //覆盖电脑状态栏
+
+            try  //加载秒数统计
+            {
+                long total;
+                total = await GetTotalSecond();
+                SaveTotalSecond(total);
+                secondTotalShow.Text = $"你已经贡献了{total}秒";
+            }
+            catch { }
         }
 
-        private async void Timer_Tick(object sender, object e)
+        private async void Timer_Tick(object sender, object e)    //1s定时执行
         {
             if (isAutoAddOneSecondOpen.IsOn)
             {
@@ -82,7 +91,7 @@ namespace addOneSecond
             catch { }
         }
 
-        private async void secondGet_Click(object sender, RoutedEventArgs e)
+        private async void secondGet_Click(object sender, RoutedEventArgs e)  //+1s按键
         {
             this.addedOneSecondStoryboard.Begin();  //+1s动画
             try
@@ -93,13 +102,13 @@ namespace addOneSecond
             catch { }
         }
 
-        private void settings_Click(object sender, RoutedEventArgs e)
+        private void settings_Click(object sender, RoutedEventArgs e)  //设置按钮
         {
             mainSplitView.IsPaneOpen = !mainSplitView.IsPaneOpen;  //开关SplitView设置页
         }
 
 
-        private void isfullScreen_Toggled(object sender, RoutedEventArgs e)
+        private void isfullScreen_Toggled(object sender, RoutedEventArgs e)  //全屏按钮
         {
             if (isfullScreen.IsOn)
             {
@@ -112,15 +121,13 @@ namespace addOneSecond
             SaveSettings();
         }
 
-        private void ApplyBackGroungColor_Click(object sender, RoutedEventArgs e)
+        private void ApplyBackGroungColor_Click(object sender, RoutedEventArgs e) //应用背景颜色
         {
-            //应用背景颜色
             SaveSettings();
         }
 
-        private void ApplyFontColor_Click(object sender, RoutedEventArgs e)
+        private void ApplyFontColor_Click(object sender, RoutedEventArgs e)//应用字体颜色
         {
-            //应用字体颜色
             SaveSettings();
         }
 
@@ -135,7 +142,7 @@ namespace addOneSecond
                 secondTotalShow.Text = $"你已经贡献了{total}秒";
             }
             catch { }
-        }
+        }   //本地计数+1s
 
         private async void SaveTotalSecond(long seconds)
         {
@@ -155,7 +162,7 @@ namespace addOneSecond
                 }
             }
             catch { }
-        }
+        }  //保存总秒数
 
         private async Task<long> GetTotalSecond()
         {
@@ -186,7 +193,7 @@ namespace addOneSecond
             }
 
             return seconds;
-        }
+        }  //获取总秒数
 
         private async void SaveSettings()    //保存设置
         {
@@ -333,127 +340,47 @@ namespace addOneSecond
                     }
                 }
             }
-            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
-            secondsShow.Foreground = color;
-            secondGet.Foreground = color;
-            addedOneSecondTextBlock.Foreground = color;
-            settings.Foreground = color;
-            secondTotalShow.Foreground = color;
-            SolidColorBrush color2 = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
-            mainGrid.Background = color2;    //应用背景颜色
+            SetBcakGroundColor();
+            SetForeColor();
+        }   //加载设置
 
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                StatusBar statusBar = StatusBar.GetForCurrentView();
-                statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
-                statusBar.BackgroundOpacity = 1;
-            }//手机状态栏颜色
-        }
-
-        private void isAutoAddOneSecondOpen_Toggled(object sender, RoutedEventArgs e)
+        private void isAutoAddOneSecondOpen_Toggled(object sender, RoutedEventArgs e)  //自动+1s开关按键
         {
             SaveSettings();
         }
 
-        private void BackGroundColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void BackGroundColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)  //背景颜色调节
         {
-            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
-            mainGrid.Background = color;    //应用背景颜色
-
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                StatusBar statusBar = StatusBar.GetForCurrentView();
-                statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                //statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
-                statusBar.BackgroundOpacity = 1;
-            }//手机状态栏颜色
+            SetBcakGroundColor();
         }
 
-        private void BackGroundColorGreenSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void BackGroundColorGreenSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)  //背景颜色调节
         {
-            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
-            mainGrid.Background = color;    //应用背景颜色
-
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                StatusBar statusBar = StatusBar.GetForCurrentView();
-                statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                //statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
-                statusBar.BackgroundOpacity = 1;
-            }//手机状态栏颜色
+            SetBcakGroundColor();
         }
 
-        private void BackGroundColorBlueSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void BackGroundColorBlueSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)  //背景颜色调节
         {
-            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
-            mainGrid.Background = color;    //应用背景颜色
-
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                StatusBar statusBar = StatusBar.GetForCurrentView();
-                statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                //statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
-                statusBar.BackgroundOpacity = 1;
-            }//手机状态栏颜色
+            SetBcakGroundColor();
         }
 
-        private void FontColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void FontColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)  //颜色调节
         {
-            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
-            secondsShow.Foreground = color;    //应用字体颜色
-            secondGet.Foreground = color;
-            addedOneSecondTextBlock.Foreground = color;
-            settings.Foreground = color;
-            secondTotalShow.Foreground = color;
-
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                StatusBar statusBar = StatusBar.GetForCurrentView();
-                //statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
-                statusBar.BackgroundOpacity = 1;
-            }//手机状态栏颜色
+            SetForeColor();
         }
 
-        private void FontColorGreenSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void FontColorGreenSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)  //颜色调节
         {
-            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
-            secondsShow.Foreground = color;    //应用字体颜色
-            secondGet.Foreground = color;
-            addedOneSecondTextBlock.Foreground = color;
-            settings.Foreground = color;
-            secondTotalShow.Foreground = color;
-
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                StatusBar statusBar = StatusBar.GetForCurrentView();
-                //statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
-                statusBar.BackgroundOpacity = 1;
-            }//手机状态栏颜色
+            SetForeColor();
         }
 
-        private void FontColorBlueSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void FontColorBlueSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)  //颜色调节
         {
-            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
-            secondsShow.Foreground = color;    //应用字体颜色
-            secondGet.Foreground = color;
-            addedOneSecondTextBlock.Foreground = color;
-            settings.Foreground = color;
-            secondTotalShow.Foreground = color;
-
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                StatusBar statusBar = StatusBar.GetForCurrentView();
-                //statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
-                statusBar.BackgroundOpacity = 1;
-            }//手机状态栏颜色
+            SetForeColor();
         }
 
 
-        private async void isTileFresh_Toggled(object sender, RoutedEventArgs e)
+        private async void isTileFresh_Toggled(object sender, RoutedEventArgs e)  //磁贴设置按钮
         {
             if (isTileFresh.IsOn)
             {
@@ -464,7 +391,7 @@ namespace addOneSecond
         }
 
 
-        private async Task setLiveTile()
+        private async Task setLiveTile()   //开启磁贴
         {
             try
             {
@@ -495,13 +422,8 @@ namespace addOneSecond
             updater.StartPeriodicUpdate(tileContent, requestedInterval);
         }
 
-        public void openAuto()
-        {
-            isAutoAddOneSecondOpen.IsOn = true;
-        }
-
         private Windows.System.Display.DisplayRequest _displayRequest;
-        private void isDisplayRequest_Toggled(object sender, RoutedEventArgs e)
+        private void isDisplayRequest_Toggled(object sender, RoutedEventArgs e) //常亮按钮
         {
             if (isDisplayRequest.IsOn)
             {
@@ -521,5 +443,44 @@ namespace addOneSecond
             }
             SaveSettings();
         }
+
+
+        private void SetForeColor()  //设置字体颜色
+        {
+            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value));
+            secondsShow.Foreground = color;    //应用字体颜色
+            secondGet.Foreground = color;
+            addedOneSecondTextBlock.Foreground = color;
+            settings.Foreground = color;
+            secondTotalShow.Foreground = color;
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                StatusBar statusBar = StatusBar.GetForCurrentView();
+                //statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
+                statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
+                statusBar.BackgroundOpacity = 1;
+            }//手机状态栏颜色
+        }
+
+        private void SetBcakGroundColor()  //设置背景颜色
+        {
+            SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
+            mainGrid.Background = color;    //应用背景颜色
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                StatusBar statusBar = StatusBar.GetForCurrentView();
+                statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
+                //statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
+                statusBar.BackgroundOpacity = 1;
+            }//手机状态栏颜色
+        }
+
+        public void openAuto()  //语音调用的东西
+        {
+            isAutoAddOneSecondOpen.IsOn = true;
+        }
+
     }
 }
