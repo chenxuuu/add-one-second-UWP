@@ -49,6 +49,11 @@
                                   OnContent="动态磁贴已开启（半小时一刷新）" 
                                   Margin="5"
                                   Toggled="isTileFresh_Toggled"/>
+                    <ToggleSwitch Name="isDisplayRequest" 
+                                  OffContent="屏幕常亮已关闭" 
+                                  OnContent="屏幕常亮已开启" 
+                                  Margin="5"
+                                  Toggled="isDisplayRequest_Toggled"/>
                     <TextBlock Text="关闭本软件后，对小娜说 续一秒 即可死机续命（我也不知道为什么会死机啊，明明设置的是打开这个软件，希望懂的人帮忙改改。）本软件运行时，此指令能开启自动+1s功能。" Margin="5,5,20,5" TextWrapping="Wrap"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="背景颜色：" FontSize="22" Margin="5"/>

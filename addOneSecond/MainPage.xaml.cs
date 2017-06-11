@@ -202,7 +202,7 @@ namespace addOneSecond
                 {
                     using (StreamWriter write = new StreamWriter(file))
                     {
-                        write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8}",
+                        write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}",
                                                     isfullScreen.IsOn,
                                                     isAutoAddOneSecondOpen.IsOn,
                                                     BackGroundColorRedSlider.Value,
@@ -211,7 +211,8 @@ namespace addOneSecond
                                                     FontColorRedSlider.Value,
                                                     FontColorGreenSlider.Value,
                                                     FontColorBlueSlider.Value,
-                                                    isTileFresh.IsOn
+                                                    isTileFresh.IsOn,
+                                                    isDisplayRequest.IsOn
                                                    ));
                     }
                 }
@@ -315,6 +316,18 @@ namespace addOneSecond
                         else
                         {
                             isTileFresh.IsOn = false;
+                        }
+                        count_temp++;
+                    }
+                    else if (count_temp == 9)
+                    {
+                        if (i.ToString() == "True")
+                        {
+                            isDisplayRequest.IsOn = true;
+                        }
+                        else
+                        {
+                            isDisplayRequest.IsOn = false;
                         }
                         count_temp++;
                     }
@@ -487,5 +500,26 @@ namespace addOneSecond
             isAutoAddOneSecondOpen.IsOn = true;
         }
 
+        private Windows.System.Display.DisplayRequest _displayRequest;
+        private void isDisplayRequest_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (isDisplayRequest.IsOn)
+            {
+                //create the request instance if needed
+                if (_displayRequest == null)
+                    _displayRequest = new Windows.System.Display.DisplayRequest();
+                //make request to put in active state
+                _displayRequest.RequestActive();
+            }
+            else
+            {
+                //must be same instance, so quit if it doesn't exist
+                if (_displayRequest == null)
+                    return;
+                //undo the request
+                _displayRequest.RequestRelease();
+            }
+            SaveSettings();
+        }
     }
 }
