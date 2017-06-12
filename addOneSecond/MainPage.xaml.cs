@@ -480,11 +480,15 @@ namespace addOneSecond
 
         private async Task ShowRealTime()  //显示被续过的时间
         {
-            long total;
-            total = await GetTotalSecond();
-            DateTime now = DateTime.Now;
-            DateTime timeDeleted = now.AddSeconds(total);
-            realTime.Text = "你的实际时间：" + timeDeleted.ToString("yyyy年MM月dd日 HH:mm:ss");
+            try
+            {
+                long total;
+                total = await GetTotalSecond();
+                DateTime now = DateTime.Now;
+                DateTime timeDeleted = now.AddSeconds(total);
+                realTime.Text = "你的实际时间：" + timeDeleted.ToString("yyyy年MM月dd日 HH:mm:ss");
+            }
+            catch { }
         }
 
         public void openAuto()  //语音调用的东西
