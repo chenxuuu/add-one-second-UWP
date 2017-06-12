@@ -54,6 +54,11 @@
                                   OnContent="屏幕常亮已开启" 
                                   Margin="5"
                                   Toggled="isDisplayRequest_Toggled"/>
+                    <ToggleSwitch Name="isPlayAudio" 
+                                  OffContent="音效已关闭" 
+                                  OnContent="音效已开启" 
+                                  Margin="5"
+                                  Toggled="isPlayAudio_Toggled"/>
                     <TextBlock Text="关闭本软件后，对小娜说 续一秒 即可死机续命（我也不知道为什么会死机啊，明明设置的是打开这个软件，希望懂的人帮忙改改。）本软件运行时，此指令能开启自动+1s功能。" Margin="5,5,20,5" TextWrapping="Wrap"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="背景颜色：" FontSize="22" Margin="5"/>
@@ -149,6 +154,7 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                <MediaElement Name="MyMediaElement" AutoPlay="True" />
                 <TextBlock Name="secondTotalShow" Text="已贡献时间（加载中。。。）" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <TextBlock Name="realTime" Text="你的实际时间（加载中。。。）" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
                 <Viewbox Grid.Row="0">

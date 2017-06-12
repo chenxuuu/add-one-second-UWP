@@ -225,6 +225,15 @@
     <Content Include="Assets\StoreLogo.scale.scale-150.png" />
     <Content Include="Assets\StoreLogo.scale.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale.scale-400.png" />
+    <Content Include="Assets\wav\1.wav" />
+    <Content Include="Assets\wav\2.wav" />
+    <Content Include="Assets\wav\3.wav" />
+    <Content Include="Assets\wav\4.wav" />
+    <Content Include="Assets\wav\5.wav" />
+    <Content Include="Assets\wav\6.wav" />
+    <Content Include="Assets\wav\7.wav" />
+    <Content Include="Assets\wav\8.wav" />
+    <Content Include="Assets\wav\9.wav" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />

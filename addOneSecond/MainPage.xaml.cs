@@ -19,6 +19,8 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Notifications;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Windows.Media.Playback;
+using Windows.Media.Core;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -30,6 +32,7 @@ namespace addOneSecond
     public sealed partial class MainPage : Page
     {
         DispatcherTimer timer;//定义定时器
+        Random rankey = new Random();
 
         public MainPage()
         {
@@ -67,6 +70,7 @@ namespace addOneSecond
         {
             if (isAutoAddOneSecondOpen.IsOn)
             {
+                PlayAudio();
                 this.addedOneSecondStoryboard.Begin();  //+1s动画
                 try
                 {
@@ -94,6 +98,7 @@ namespace addOneSecond
 
         private async void secondGet_Click(object sender, RoutedEventArgs e)  //+1s按键
         {
+            PlayAudio();
             this.addedOneSecondStoryboard.Begin();  //+1s动画
             try
             {
@@ -101,6 +106,14 @@ namespace addOneSecond
                 SecondAdd();
             }
             catch { }
+        }
+
+        private void PlayAudio() //播放声音
+        {
+            if(MyMediaElement.CurrentState.ToString() != "Playing" && isPlayAudio.IsOn)
+            {
+                MyMediaElement.Source = new Uri("ms-appx:///Assets/wav/"+ rankey.Next(1,10)+ ".wav");
+            }
         }
 
         private void settings_Click(object sender, RoutedEventArgs e)  //设置按钮
@@ -210,7 +223,7 @@ namespace addOneSecond
                 {
                     using (StreamWriter write = new StreamWriter(file))
                     {
-                        write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}",
+                        write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10}",
                                                     isfullScreen.IsOn,
                                                     isAutoAddOneSecondOpen.IsOn,
                                                     BackGroundColorRedSlider.Value,
@@ -220,7 +233,8 @@ namespace addOneSecond
                                                     FontColorGreenSlider.Value,
                                                     FontColorBlueSlider.Value,
                                                     isTileFresh.IsOn,
-                                                    isDisplayRequest.IsOn
+                                                    isDisplayRequest.IsOn,
+                                                    isPlayAudio.IsOn
                                                    ));
                     }
                 }
@@ -338,6 +352,18 @@ namespace addOneSecond
                         }
                         count_temp++;
                     }
+                    else if (count_temp == 10)
+                    {
+                        if (i.ToString() == "True")
+                        {
+                            isPlayAudio.IsOn = true;
+                        }
+                        else
+                        {
+                            isPlayAudio.IsOn = false;
+                        }
+                        count_temp++;
+                    }
                 }
             }
             SetBcakGroundColor();
@@ -423,6 +449,7 @@ namespace addOneSecond
         }
 
         private Windows.System.Display.DisplayRequest _displayRequest;
+
         private void isDisplayRequest_Toggled(object sender, RoutedEventArgs e) //常亮按钮
         {
             if (isDisplayRequest.IsOn)
@@ -496,5 +523,9 @@ namespace addOneSecond
             isAutoAddOneSecondOpen.IsOn = true;
         }
 
+        private void isPlayAudio_Toggled(object sender, RoutedEventArgs e)   //音效开关按钮
+        {
+            SaveSettings();
+        }
     }
 }
