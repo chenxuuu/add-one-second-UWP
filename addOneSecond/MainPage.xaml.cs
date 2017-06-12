@@ -120,8 +120,7 @@ namespace addOneSecond
         {
             mainSplitView.IsPaneOpen = !mainSplitView.IsPaneOpen;  //开关SplitView设置页
         }
-
-
+        
         private void isfullScreen_Toggled(object sender, RoutedEventArgs e)  //全屏按钮
         {
             if (isfullScreen.IsOn)
@@ -411,7 +410,6 @@ namespace addOneSecond
             if (isTileFresh.IsOn)
             {
                 await setLiveTile();
-                isTileFresh.IsEnabled = false;
             }
             SaveSettings();
         }
@@ -523,8 +521,19 @@ namespace addOneSecond
             isAutoAddOneSecondOpen.IsOn = true;
         }
 
-        private void isPlayAudio_Toggled(object sender, RoutedEventArgs e)   //音效开关按钮
+        private async void isPlayAudio_Toggled(object sender, RoutedEventArgs e)   //音效开关按钮
         {
+            try
+            {
+                if (await GetTotalSecond() < 817)
+                {
+                    isPlayAudio.IsOn = false;
+                }
+            }
+            catch
+            {
+                isPlayAudio.IsOn = false;
+            }
             SaveSettings();
         }
     }

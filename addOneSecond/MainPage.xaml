@@ -45,7 +45,7 @@
                                   Margin="5"
                                   Toggled="isAutoAddOneSecondOpen_Toggled"/>
                     <ToggleSwitch Name="isTileFresh" 
-                                  OffContent="动态磁贴已关闭（开了就无法关闭）" 
+                                  OffContent="动态磁贴已关闭" 
                                   OnContent="动态磁贴已开启（半小时一刷新）" 
                                   Margin="5"
                                   Toggled="isTileFresh_Toggled"/>
@@ -55,8 +55,8 @@
                                   Margin="5"
                                   Toggled="isDisplayRequest_Toggled"/>
                     <ToggleSwitch Name="isPlayAudio" 
-                                  OffContent="音效已关闭" 
-                                  OnContent="音效已开启" 
+                                  OffContent="音效已关闭（贡献817秒才能开）" 
+                                  OnContent="音效已开启"
                                   Margin="5"
                                   Toggled="isPlayAudio_Toggled"/>
                     <TextBlock Text="关闭本软件后，对小娜说 续一秒 即可死机续命（我也不知道为什么会死机啊，明明设置的是打开这个软件，希望懂的人帮忙改改。）本软件运行时，此指令能开启自动+1s功能。" Margin="5,5,20,5" TextWrapping="Wrap"/>
