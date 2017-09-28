@@ -112,8 +112,8 @@ namespace addOneSecond
         {
             if(MyMediaElement.CurrentState.ToString() != "Playing" && isPlayAudio.IsOn)
             {
-                //MyMediaElement.Source = new Uri("ms-appx:///Assets/wav/"+ rankey.Next(1,10)+ ".wav");
-                MyMediaElement.Source = new Uri("ms-appx:///Assets/wav/coin.mp3");
+                MyMediaElement.Source = new Uri("ms-appx:///Assets/wav/"+ rankey.Next(1,10)+ ".wav");
+                //MyMediaElement.Source = new Uri("ms-appx:///Assets/wav/coin.mp3");
             }
         }
 

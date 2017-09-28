@@ -106,13 +106,13 @@ $resultstr = random_str();
 ?>
 <tile>
   <visual version="2" branding="logo" displayName="+1s">
-    <!-- <binding template="TileSquare150x150PeekImageAndText01" fallback="TileSquarePeekImageAndText01"> -->
-      <!-- <image id="1" src="ms-appx:///Assets/pic/<?php echo $result;?>.png" alt="alt text"/> -->
-      <!-- <text id="1">时间众筹总计</text> -->
-      <!-- <text id="2"><?php echo $dd.'天';?></text> -->
-      <!-- <text id="3"><?php echo $hh.'小时';?></text> -->
-      <!-- <text id="4"><?php echo $mm.'分钟';?></text> -->
-    <!-- </binding> -->
+    <binding template="TileSquare150x150PeekImageAndText01" fallback="TileSquarePeekImageAndText01">
+      <image id="1" src="ms-appx:///Assets/pic/<?php echo $result;?>.png" alt="alt text"/>
+      <text id="1">时间众筹总计</text>
+      <text id="2"><?php echo $dd.'天';?></text>
+      <text id="3"><?php echo $hh.'小时';?></text>
+      <text id="4"><?php echo $mm.'分钟';?></text>
+    </binding>
     <binding template="TileWide310x150Text09" fallback="TileWideText09">
       <?php if($result==75){echo '<image src="ms-appx:///Assets/pic/75.png" placement="background"/>';}?>
       <text id="1"><?php echo '时间众筹总计：'.$dd.'天'. $hh.'小时'.$mm.'分钟';?></text>
