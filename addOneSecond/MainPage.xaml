@@ -31,7 +31,7 @@
     </Page.Resources>
     <SplitView Name="mainSplitView" DisplayMode="Overlay" OpenPaneLength="300">
         <SplitView.Pane>
-            <ScrollViewer Background="White">
+            <ScrollViewer Background="#FFD9D9D9">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="设置" HorizontalAlignment="Center" FontSize="22" Margin="5"/>
                     <ToggleSwitch Name="isfullScreen"
@@ -73,6 +73,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="红：" FontSize="20" Margin="5"/>
                         <Slider Name="BackGroundColorRedSlider" 
@@ -97,6 +98,15 @@
                                 Width="220"
                                 Margin="2,0,20,0"
                                 ValueChanged="BackGroundColorBlueSlider_ValueChanged"/>
+                        <TextBlock Text="透：" FontSize="20" Margin="5" Grid.Row="3"/>
+                        <Slider Name="BackGroundAcrylicBlueSlider" 
+                                Grid.Column="1" 
+                                Grid.Row="3"
+                                Maximum="100"
+                                Width="220"
+                                Margin="2,0,20,0"
+                                Value="50"
+                                ValueChanged="BackGroundAcrylicBlueSlider_ValueChanged"/>
                     </Grid>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="字体颜色：" FontSize="22" Margin="5"/>
@@ -149,7 +159,7 @@
             </ScrollViewer>
         </SplitView.Pane>
         <SplitView.Content>
-            <Grid Name="mainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid Name="mainGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="*"/>
