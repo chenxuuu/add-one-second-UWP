@@ -65,6 +65,20 @@ namespace addOneSecond
                 secondTotalShow.Text = $"你已经贡献了{total}秒";
             }
             catch { }
+
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase"))
+            {
+                Windows.UI.Xaml.Media.AcrylicBrush myBrush = new Windows.UI.Xaml.Media.AcrylicBrush();
+                myBrush.BackgroundSource = Windows.UI.Xaml.Media.AcrylicBackgroundSource.HostBackdrop;
+                myBrush.TintColor = Color.FromArgb(255,255,255,255);
+                myBrush.FallbackColor = Color.FromArgb(255, 255, 255, 255);
+                myBrush.TintOpacity = 0.3;
+
+
+                mainSplitView.Background = myBrush;
+
+            }
         }
 
         private async void Timer_Tick(object sender, object e)    //1s定时执行
@@ -224,7 +238,7 @@ namespace addOneSecond
                 {
                     using (StreamWriter write = new StreamWriter(file))
                     {
-                        write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10}",
+                        write.Write(string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9};{10};{11}",
                                                     isfullScreen.IsOn,
                                                     isAutoAddOneSecondOpen.IsOn,
                                                     BackGroundColorRedSlider.Value,
@@ -235,7 +249,8 @@ namespace addOneSecond
                                                     FontColorBlueSlider.Value,
                                                     isTileFresh.IsOn,
                                                     isDisplayRequest.IsOn,
-                                                    isPlayAudio.IsOn
+                                                    isPlayAudio.IsOn,
+                                                    BackGroundAcrylicBlueSlider.Value
                                                    ));
                     }
                 }
@@ -363,6 +378,11 @@ namespace addOneSecond
                         {
                             isPlayAudio.IsOn = false;
                         }
+                        count_temp++;
+                    }
+                    else if (count_temp == 11)
+                    {
+                        BackGroundAcrylicBlueSlider.Value = double.Parse(i.ToString());
                         count_temp++;
                     }
                 }
@@ -493,29 +513,35 @@ namespace addOneSecond
 
         private void SetBcakGroundColor()  //设置背景颜色
         {
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase"))
+            try
             {
-                Windows.UI.Xaml.Media.AcrylicBrush myBrush = new Windows.UI.Xaml.Media.AcrylicBrush();
-                myBrush.BackgroundSource = Windows.UI.Xaml.Media.AcrylicBackgroundSource.HostBackdrop;
-                myBrush.TintColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                myBrush.FallbackColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                myBrush.TintOpacity = BackGroundAcrylicBlueSlider.Value / 100;
-
-                mainGrid.Background = myBrush;
-            }
-            else
-            {
-                SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
-                mainGrid.Background = color;    //应用背景颜色
-
-                if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase"))
                 {
-                    StatusBar statusBar = StatusBar.GetForCurrentView();
-                    statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
-                    //statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
-                    statusBar.BackgroundOpacity = 1;
-                }//手机状态栏颜色
+                    Windows.UI.Xaml.Media.AcrylicBrush myBrush = new Windows.UI.Xaml.Media.AcrylicBrush();
+                    myBrush.BackgroundSource = Windows.UI.Xaml.Media.AcrylicBackgroundSource.HostBackdrop;
+                    myBrush.TintColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
+                    myBrush.FallbackColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
+                    myBrush.TintOpacity = BackGroundAcrylicBlueSlider.Value / 100;
+
+
+                    mainGrid.Background = myBrush;
+
+                }
+                else
+                {
+                    SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
+                    mainGrid.Background = color;    //应用背景颜色
+
+                    if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                    {
+                        StatusBar statusBar = StatusBar.GetForCurrentView();
+                        statusBar.BackgroundColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
+                        //statusBar.ForegroundColor = Color.FromArgb(255, (byte)FontColorRedSlider.Value, (byte)FontColorGreenSlider.Value, (byte)FontColorBlueSlider.Value);
+                        statusBar.BackgroundOpacity = 1;
+                    }//手机状态栏颜色
+                }
             }
+            catch { }
         }
 
         private async Task ShowRealTime()  //显示被续过的时间
