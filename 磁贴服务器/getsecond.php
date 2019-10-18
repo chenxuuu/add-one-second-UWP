@@ -1,5 +1,7 @@
 <?php
-$html = file_get_contents('https://angry.im/l/life');
+$counterFile = "second.txt";
+$html = file_get_contents($counterFile);
+//$html = file_get_contents('https://angry.im/l/life');
 $allSeconds = intval($html);
 $dd = $allSeconds / 60 / 60 / 24 % 9999999;
 $hh = $allSeconds / 60 / 60 % 24;
@@ -116,13 +118,13 @@ $resultstr = random_str();
     <binding template="TileWide310x150Text09" fallback="TileWideText09">
       <?php if($result==75){echo '<image src="ms-appx:///Assets/pic/75.png" placement="background"/>';}?>
       <text id="1"><?php echo '时间众筹总计：'.$dd.'天'. $hh.'小时'.$mm.'分钟';?></text>
-      <text id="2">长者语录：<?php echo $resultstr;?></text>
+      <text id="2">长者语录：<?php if($result==75){echo '你们啊，要考虑历史的进程！今天可是我的生日！（祝长者生日快乐！越活越年轻！）';}else{echo $resultstr;}?></text>
     </binding>
     <binding template="TileLarge">
       <?php if($result==75){echo '<image src="ms-appx:///Assets/pic/75.png" placement="background"/>';}?>
       <text hint-style="title">时间众筹总计：</text>
       <text hint-style="base"><?php echo $dd.'天'. $hh.'小时'.$mm.'分钟';?></text>
-      <text hint-wrap="true" hint-style="baseSubtle">长者语录：<?php echo $resultstr;?></text>
+      <text hint-wrap="true" hint-style="baseSubtle">长者语录：<?php if($result==75){echo '你们啊，要考虑历史的进程！今天可是我的生日！（祝长者生日快乐！越活越年轻！）';}else{echo $resultstr;}?></text>
     </binding>
   </visual>
 </tile>
