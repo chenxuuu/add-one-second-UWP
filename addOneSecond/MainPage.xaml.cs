@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -461,7 +461,7 @@ namespace addOneSecond
             }
             catch { }
 
-            var tileContent = new Uri("https://www.chenxublog.com/getsecond.php");  //自建网站
+            var tileContent = new Uri("https://qq.papapoi.com/addOneSecond/getsecond.php");  //自建网站
             var requestedInterval = PeriodicUpdateRecurrence.HalfHour;   //半小时一次
 
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
