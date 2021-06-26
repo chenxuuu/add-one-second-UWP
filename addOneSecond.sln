@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addOneSecond", "addOneSecond\addOneSecond.csproj", "{E0318F57-E451-4247-BC82-78356E17D3AA}"
 EndProject
@@ -18,6 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E0318F57-E451-4247-BC82-78356E17D3AA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E0318F57-E451-4247-BC82-78356E17D3AA}.Debug|Any CPU.Build.0 = Debug|x86
+		{E0318F57-E451-4247-BC82-78356E17D3AA}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{E0318F57-E451-4247-BC82-78356E17D3AA}.Debug|ARM.ActiveCfg = Debug|ARM
 		{E0318F57-E451-4247-BC82-78356E17D3AA}.Debug|ARM.Build.0 = Debug|ARM
 		{E0318F57-E451-4247-BC82-78356E17D3AA}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -40,5 +42,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {437ACE38-131F-4101-9F63-FFEB619179CF}
 	EndGlobalSection
 EndGlobal

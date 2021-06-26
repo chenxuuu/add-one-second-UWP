@@ -89,7 +89,6 @@ namespace addOneSecond
                 this.addedOneSecondStoryboard.Begin();  //+1s动画
                 try
                 {
-                    await webLib.HttpPost("https://angry.im/p/life", "+1s");  //post用来+1s
                     SecondAdd();
                 }
                 catch { }
@@ -97,8 +96,8 @@ namespace addOneSecond
             string result;
             try
             {
-                string allSecondsString = await webLib.HttpGet("https://angry.im/l/life");  //获取秒数
-                long allSeconds = long.Parse(allSecondsString);   //转换成long
+                TimeSpan tn = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+                long allSeconds = 105695630 + ((long)tn.TotalSeconds - 1606379872) * 7;
                 long dd, mm, hh, ss;     //用于存储最终数值
                 dd = allSeconds / 60 / 60 / 24;
                 hh = allSeconds / 60 / 60 % 24;
@@ -117,7 +116,6 @@ namespace addOneSecond
             this.addedOneSecondStoryboard.Begin();  //+1s动画
             try
             {
-                await webLib.HttpPost("https://angry.im/p/life", "+1s");  //post用来+1s
                 SecondAdd();
             }
             catch { }
@@ -441,10 +439,10 @@ namespace addOneSecond
         {
             try
             {
-                string allSecondsString = await webLib.HttpGet("https://angry.im/l/life");  //获取秒数
-                long allSeconds = long.Parse(allSecondsString);   //转换成long
+                TimeSpan tn = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+                long allSeconds = 105695630 + ((long)tn.TotalSeconds - 1606379872) * 7;
                 long dd, mm, hh, ss;     //用于存储最终数值
-                dd = allSeconds / 60 / 60 / 24;
+                dd = allSeconds / 60 / 60 / 24 % 9999999;
                 hh = allSeconds / 60 / 60 % 24;
                 mm = allSeconds / 60 % 60;
                 ss = allSeconds % 60;
@@ -461,7 +459,7 @@ namespace addOneSecond
             }
             catch { }
 
-            var tileContent = new Uri("https://qq.papapoi.com/addOneSecond/getsecond.php");  //自建网站
+            var tileContent = new Uri("https://add-one-second.papapoi.workers.dev/");  //自建网站
             var requestedInterval = PeriodicUpdateRecurrence.HalfHour;   //半小时一次
 
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
@@ -523,14 +521,15 @@ namespace addOneSecond
                     myBrush.FallbackColor = Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value);
                     myBrush.TintOpacity = BackGroundAcrylicBlueSlider.Value / 100;
 
-
-                    mainGrid.Background = myBrush;
+                    if(mainGrid != null)
+                        mainGrid.Background = myBrush;
 
                 }
                 else
                 {
                     SolidColorBrush color = new SolidColorBrush(Color.FromArgb(255, (byte)BackGroundColorRedSlider.Value, (byte)BackGroundColorGreenSlider.Value, (byte)BackGroundColorBlueSlider.Value));
-                    mainGrid.Background = color;    //应用背景颜色
+                    if (mainGrid != null)
+                        mainGrid.Background = color;    //应用背景颜色
 
                     if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
                     {

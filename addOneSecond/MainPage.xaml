@@ -148,12 +148,9 @@
                     </Grid>
                     <TextBlock Text="关于" FontSize="22" Margin="5"/>
                     <TextBlock Text="本软件用于时间众筹项目，欢迎大家帮助本软件实现更多功能。提交新功能的建议可以直接在应用商店评论该软件~" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
-                    <TextBlock Text="本软件利用了angry.im提供的api进行处理，并将结果显示在软件中。" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
-                    <TextBlock Text="感谢https://angry.im/提供的api。" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
                     <TextBlock Text="你也可以在github上参与本软件的编写与优化：" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
                     <TextBlock Text="https://github.com/chenxuuu/add-one-second-UWP" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
                     <TextBlock Text="如果你喜欢这个软件的话，可以让作者吃顿好的（哪里不对）：" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
-                    <TextBlock Text="支付宝：liucx1@foxmail.com" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
                     <TextBlock Text="paypal：https://www.paypal.me/chenxuuu" IsTextSelectionEnabled="True" FontSize="15" Margin="5,5,20,5" TextWrapping="Wrap"/>
                 </StackPanel>
             </ScrollViewer>
