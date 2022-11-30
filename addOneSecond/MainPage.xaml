@@ -180,7 +180,8 @@
                           FontFamily="Impact"
                           IsCompact="False" 
                           Click="secondGet_Click" 
-                          HorizontalAlignment="Center" />
+                          HorizontalAlignment="Center" 
+                          IsEnabled="False"/>
                 </Viewbox>
 
                 <Viewbox Grid.Row="0">

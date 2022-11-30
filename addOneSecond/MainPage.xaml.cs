@@ -96,8 +96,7 @@ namespace addOneSecond
             string result;
             try
             {
-                TimeSpan tn = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
-                long allSeconds = 105695630 + ((long)tn.TotalSeconds - 1606379872) * 7;
+                long allSeconds = 549682411;
                 long dd, mm, hh, ss;     //用于存储最终数值
                 dd = allSeconds / 60 / 60 / 24;
                 hh = allSeconds / 60 / 60 % 24;
@@ -304,7 +303,7 @@ namespace addOneSecond
                     {
                         if (i.ToString() == "True")
                         {
-                            isAutoAddOneSecondOpen.IsOn = true;
+                            //isAutoAddOneSecondOpen.IsOn = true;
                         }
                         else
                         {
@@ -391,7 +390,7 @@ namespace addOneSecond
 
         private void isAutoAddOneSecondOpen_Toggled(object sender, RoutedEventArgs e)  //自动+1s开关按键
         {
-            SaveSettings();
+            isAutoAddOneSecondOpen.IsOn = false;
         }
 
         private void BackGroundColorRedSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)  //背景颜色调节
@@ -558,7 +557,7 @@ namespace addOneSecond
 
         public void openAuto()  //语音调用的东西
         {
-            isAutoAddOneSecondOpen.IsOn = true;
+            //isAutoAddOneSecondOpen.IsOn = true;
         }
 
         private async void isPlayAudio_Toggled(object sender, RoutedEventArgs e)   //音效开关按钮
